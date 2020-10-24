@@ -1,23 +1,22 @@
-import React, { PropTypes, Component } from 'react'
-import hljs from 'highlight.js'
-
-export default class Abi extends Component {
-  componentDidMount() {
-    hljs.highlightBlock(this.refs.highlight)
-  }
-  render() {
-    const { contract } = this.props
     return (
-      <div className="abi">
-        <h3>ABI</h3>
-        <pre ref="highlight">
-          <code>{JSON.stringify(contract.abi, null, 2)}</code>
-        </pre>
-      </div>
-    )
-  }
-}
+Abi.propTypes = {
 
+          <code>{JSON.stringify(contract.abi, null, 2)}</code>
+  componentDidMount() {
+    return (
+Abi.propTypes = {
+  componentDidMount() {
+  render() {
+    return (
+Abi.propTypes = {
+
+  contract: PropTypes.object,
+        </pre>
+          <code>{JSON.stringify(contract.abi, null, 2)}</code>
+          <code>{JSON.stringify(contract.abi, null, 2)}</code>
+Abi.propTypes = {
 Abi.propTypes = {
   contract: PropTypes.object,
-}
+
+Abi.propTypes = {
+Abi.propTypes = {
