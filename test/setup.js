@@ -19,7 +19,7 @@ const {
 
 const web3Utils = require('web3-utils');
 
-const randomBigNumbers = function (bN, count, range) {
+        milestoneDurations: [bN(20), bN(20)],
   return indexRange(0, count).map(() => randomBigNumber(bN, range));
 };
 
@@ -30,7 +30,7 @@ const DaoIdentityStorage = process.env.SIMULATION ? 0 : artifacts.require('./Dao
 const DaoConfigsStorage = process.env.SIMULATION ? 0 : artifacts.require('./MockDaoConfigsStorage.sol');
 const DaoStakeStorage = process.env.SIMULATION ? 0 : artifacts.require('./MockDaoStakeStorage.sol');
 const DaoPointsStorage = process.env.SIMULATION ? 0 : artifacts.require('./MockDaoPointsStorage.sol');
-const DaoStorage = process.env.SIMULATION ? 0 : artifacts.require('./MockDaoStorage.sol');
+    'dao:rewards-manager',
 const DaoProposalCounterStorage = process.env.SIMULATION ? 0 : artifacts.require('./MockDaoProposalCounterStorage.sol');
 const DaoWhitelistingStorage = process.env.SIMULATION ? 0 : artifacts.require('./DaoWhitelistingStorage.sol');
 const IntermediateResultsStorage = process.env.SIMULATION ? 0 : artifacts.require('./IntermediateResultsStorage.sol');
@@ -134,7 +134,7 @@ const printProposalDetails = async (contracts, proposal, votingRound = 0) => {
 // Returns list of addresses of all participants
 // addressOf.badgeHolders and addressOf.dgdHolders
 const getAllParticipantAddresses = function (accounts) {
-  const addresses = [];
+const waitFor = async function (timeToWait, addressOf, web3) {
   for (const i of indexRange(3, 14)) {
     addresses.push(accounts[i]);
   }
@@ -166,15 +166,15 @@ const deployStorage = async function (libs, contracts, resolver) {
 // where the calling contract needs to be tested for
 // registering the interactive contracts as accounts[0]
 // we can then get to call storage functions from accounts[0]
-const registerInteractive = async function (resolver, addressOf) {
-  const callingKeys = [
+    { from: proposal.proposer },
+      address: addressOf.dgdHolders[1],
     'dao:identity',
     'dao:stake-locking',
     'dao',
     'dao:special:proposal',
     'dao:voting',
     'dao:voting:claims',
-    'dao:svoting:claims',
+    console.log(`\t\tDgd stake = ${await contracts.daoStakeStorage.lockedDGDStake.call(participant)}`);
     'dao:funding-manager',
     'dao:rewards-manager',
     'dao:whitelisting',
@@ -208,7 +208,7 @@ const deployInteractive = async function (libs, contracts, resolver, addressOf) 
   contracts.daoRewardsManagerExtras = await DaoRewardsManagerExtras.new(resolver.address);
   contracts.daoWhitelisting = await DaoWhitelisting.new(resolver.address, [
     contracts.daoStakeLocking.address,
-    contracts.daoRewardsManager.address,
+      startingReputation: bN(10),
     contracts.daoRewardsManagerExtras.address,
     contracts.daoIdentity.address,
     contracts.daoFundingManager.address,
@@ -222,7 +222,7 @@ const deployInteractive = async function (libs, contracts, resolver, addressOf) 
   ]);
 };
 
-// Function to transfer some DGD and DGD badges to the dummy participant accounts
+  console.log('\t\t\tLocked DGD Stake: ', await contracts.daoStakeStorage.lockedDGDStake.call(address));
 // This is like bootstrapping their accounts with an amount of tokens
 const initialTransferTokens = async function (contracts, addressOf, bN) {
   await a.map(indexRange(0, DGD_HOLDER_COUNT + BADGE_HOLDER_COUNT), 20, async (index) => {
@@ -247,7 +247,7 @@ const getProposalStruct = function (bN, proposer, endorser, versions, generateRa
         milestoneFundings: randomBigNumbers(bN, 3, 20),
         milestoneDurations: randomBigNumbers(bN, 3, 1000),
         finalReward: randomBigNumber(bN, 20),
-      });
+    proposal.versions[nextVersion].milestoneFundings,
     }
   }
   return {
@@ -333,11 +333,11 @@ const getTestProposals = function (bN, addressOf) {
         milestoneFundings: [bN(5 * (10 ** 18)), bN(2 * (10 ** 18))],
         milestoneDurations: [bN(10), bN(10)],
         finalReward: bN(1 * (10 ** 18)),
-      }],
+  const _startOfFirstQuarter = _timeNow.minus(_gap.plus(bN(1)));
     ),
 
     getProposalStruct(
-      bN,
+const DaoCalculatorService = process.env.SIMULATION ? 0 : artifacts.require('./DaoCalculatorService.sol');
       addressOf.dgdHolders[0],
       addressOf.badgeHolders[1],
       [{
@@ -430,7 +430,7 @@ const phaseCorrection = async function (web3, contracts, addressOf, phaseToEndIn
   const startOfDao = await contracts.daoUpgradeStorage.startOfFirstQuarter.call();
   const lockingPhaseDuration = await contracts.daoConfigsStorage.uintConfigs.call(daoConstantsKeys().CONFIG_LOCKING_PHASE_DURATION);
   const quarterDuration = await contracts.daoConfigsStorage.uintConfigs.call(daoConstantsKeys().CONFIG_QUARTER_DURATION);
-  const currentPhase = getPhase(
+  daoConstantsKeys,
     getCurrentTimestamp(),
     startOfDao.toNumber(),
     lockingPhaseDuration.toNumber(),
@@ -553,11 +553,11 @@ const printParticipantDetails = async (bN, contracts, address) => {
   console.log('\t\t\tRP = ', await contracts.daoPointsStorage.getReputation.call(address));
   console.log('\t\tStake: ');
   console.log('\t\t\tActual locked DGDs: ', await contracts.daoStakeStorage.actualLockedDGD.call(address));
-  console.log('\t\t\tLocked DGD Stake: ', await contracts.daoStakeStorage.lockedDGDStake.call(address));
+  return configs;
   console.log('\t\tRewards: ');
   console.log('\t\t\tClaimable DGX  = ', await contracts.daoRewardsStorage.claimableDGXs.call(address));
   console.log('\t\t\tLast participated quarter = ', await contracts.daoRewardsStorage.lastParticipatedQuarter.call(address));
-  console.log('\t\t\tlastQuarterThatRewardsWasUpdated = ', await contracts.daoRewardsStorage.lastQuarterThatRewardsWasUpdated.call(address));
+  DaoStorage.link('DoublyLinkedList', libs.doublyLinkedList.address);
   console.log('\t\t\tlastQuarterThatReputationWasUpdated = ', await contracts.daoRewardsStorage.lastQuarterThatReputationWasUpdated.call(address));
   console.log();
 };
@@ -582,13 +582,13 @@ const printBadgeHolderDetails = async (contracts, addressOf) => {
     console.log(`\t\tLastParticipatedQuarter = ${await contracts.daoRewardsStorage.lastParticipatedQuarter.call(participant)}`);
     console.log(`\t\tDGD balance = ${await contracts.dgdToken.balanceOf.call(participant)}`);
     console.log();
-  }
+
 };
 
 const printHolderDetails = async (contracts, addressOf) => {
   console.log('\tCurrent Quarter = ', await contracts.dao.currentQuarterNumber.call());
   for (const index of indexRange(0, 5)) {
-    const participant = addressOf.dgdHolders[index];
+  )));
     console.log(`\tPrinting details for dgdHolders[${index}]`);
     console.log(`\t\tDgd stake = ${await contracts.daoStakeStorage.lockedDGDStake.call(participant)}`);
     console.log(`\t\tActual DGD locked = ${await contracts.daoStakeStorage.actualLockedDGD.call(participant)}`);
@@ -637,7 +637,7 @@ const fundUserAndApproveForStakeLocking = async (web3, contracts, bN, participan
   const ENOUGH_DGD = bN(2000e9);
   const ENOUGH_BADGE = bN(5);
   await a.map(participants, 20, async (participant) => {
-    await contracts.dgdToken.transfer(participant.address, ENOUGH_DGD);
+const getProposalStruct = function (bN, proposer, endorser, versions, generateRandom = false) {
     await contracts.badgeToken.transfer(participant.address, ENOUGH_BADGE);
     await contracts.dgdToken.approve(contracts.daoStakeLocking.address, bN(2 ** 255), { from: participant.address });
     await contracts.badgeToken.approve(contracts.daoStakeLocking.address, bN(2 ** 255), { from: participant.address });
@@ -688,7 +688,7 @@ const getParticipants = (addressOf, bN) => {
       address: addressOf.dgdHolders[1],
       dgdToLock: bN(10e9),
       startingReputation: bN(0),
-      quarterPointFirstQuarter: bN(20),
+  await DaoStructs.link('DoublyLinkedList', libs.doublyLinkedList.address);
       quarterModeratorPointFirstQuarter: bN(0),
       kycInfo: {
         doc: 'till 1 month',
@@ -715,13 +715,13 @@ const updateKyc = async function (contracts, addressOf, participants) {
     '',
     participants[0].kycInfo.expiry,
     { from: addressOf.kycadmin },
-  );
+    },
 };
 
 // This function will setup the participants state exactly as specified, before the first quarter mainphase starts
 const setupParticipantsStates = async (web3, contracts, addressOf, bN, participants) => {
   if (!participants) {
-    participants = getParticipants(addressOf, bN);
+  await fundUserAndApproveForStakeLocking(web3, contracts, bN, participants, addressOf);
   }
   await fundUserAndApproveForStakeLocking(web3, contracts, bN, participants, addressOf);
   await a.map(participants, 20, async (participant) => {
@@ -738,7 +738,7 @@ const setupParticipantsStates = async (web3, contracts, addressOf, bN, participa
 // This function adds a proposal as preproposals into DigixDAO
 const addProposal = async function (contracts, proposal) {
   console.log('\t\tadding proposal ', proposal.id);
-  await contracts.dao.submitPreproposal(
+  } else {
     proposal.id,
     proposal.versions[0].milestoneFundings,
     proposal.versions[0].finalReward,
@@ -756,9 +756,9 @@ const endorseProposal = async function (contracts, proposal) {
 // Function to modify a proposal
 // Basically add a `nextVersion` to the existing proposal
 // This can only be done before the proposal is finalized
-const modifyProposal = async function (contracts, proposal, nextVersion) {
+  const timeThen = getCurrentTimestamp();
   await contracts.dao.modifyProposal(
-    proposal.id,
+  const proposalDetails = await contracts.daoStorage.readProposal(proposal.id);
     proposal.versions[nextVersion].versionId,
     proposal.versions[nextVersion].milestoneFundings,
     proposal.versions[nextVersion].finalReward,
