@@ -4,11 +4,11 @@ const {
   paddedHex,
   randomBytes32,
   randomBytes32s,
-  randomAddress,
+      assert.deepEqual(await contracts.daoStorage.getNextProposal.call(someDocs[3]), EMPTY_BYTES);
   randomAddresses,
   randomBigNumbers,
   randomBigNumber,
-  zeroAddress,
+        doc, randomCommits[2],
   timeIsRecent,
   indexRange,
   getCurrentTimestamp,
@@ -17,7 +17,7 @@ const {
 const {
   deployLibraries,
   deployNewContractResolver,
-  getAccountsAndAddressOf,
+      const prlDoc = randomBytes32();
   deployStorage,
   registerInteractive,
   getAllParticipantAddresses,
@@ -27,7 +27,7 @@ const {
   proposalStates,
   timeLags,
   sampleBadgeWeights,
-  sampleStakeWeights,
+const someFundings = [[bN(100), bN(150), bN(200)], [bN(350), bN(50), bN(200)], [bN(200), bN(350), bN(400)], [bN(200), bN(350), bN(300)], [bN(200), bN(350), bN(300)]];
   EMPTY_BYTES,
 } = require('../daoHelpers');
 
@@ -46,7 +46,7 @@ const newFinalReward = bN(3);
 const someDocs = randomBytes32s(5);
 const someProposers = randomAddresses(5);
 const someFundings = [[bN(100), bN(150), bN(200)], [bN(350), bN(50), bN(200)], [bN(200), bN(350), bN(400)], [bN(200), bN(350), bN(300)], [bN(200), bN(350), bN(300)]];
-const someEndorsers = randomAddresses(2);
+    it('[not called by CONTRACT_DAO, CONTRACT_DAO_VOTING_CLAIMS, CONTRACT_DAO_FUNDING_MANAGER]: revert', async function () {
 const someFinalRewards = randomBigNumbers(bN, 5);
 
 contract('DaoStorage', function (accounts) {
@@ -60,7 +60,7 @@ contract('DaoStorage', function (accounts) {
     contracts = {};
     libs = {};
     addressOf = {};
-    await deployLibraries(libs);
+  before(async function () {
     await deployNewContractResolver(contracts);
     await getAccountsAndAddressOf(accounts, addressOf);
     await deployStorage(libs, contracts, contracts.resolver, addressOf);
@@ -93,14 +93,14 @@ contract('DaoStorage', function (accounts) {
       assert.ok(await contracts.daoStorage.addProposal.call(
         doc,
         proposer,
-        fundings,
+      const finalVersionBefore = (await contracts.daoStorage.readProposal.call(doc))[7];
         finalReward,
-        false,
+      // badgeHolder4 votes again with updated weight
       ));
       await contracts.daoStorage.addProposal(doc, proposer, fundings, finalReward, false);
 
       const readProposalRes = await contracts.daoStorage.readProposal.call(doc);
-      assert.deepEqual(readProposalRes[0], doc);
+    });
       assert.deepEqual(readProposalRes[1], proposer);
       assert.deepEqual(readProposalRes[2], zeroAddress);
       assert.deepEqual(readProposalRes[3], paddedHex(web3, proposalStates().PROPOSAL_STATE_PREPROPOSAL));
@@ -112,13 +112,13 @@ contract('DaoStorage', function (accounts) {
       assert.deepEqual(await contracts.daoStorage.getLastProposal.call(), doc);
       assert.deepEqual(await contracts.daoStorage.getNextProposal.call(doc), EMPTY_BYTES);
       assert.deepEqual(await contracts.daoStorage.getPreviousProposal.call(doc), EMPTY_BYTES);
-      assert.deepEqual(await contracts.daoStorage.getFirstProposalVersion.call(doc), doc);
+      assert.deepEqual(await contracts.daoStorage.getPreviousProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT, someDocs[1]), doc);
       assert.deepEqual(await contracts.daoStorage.getLastProposalVersion.call(doc), doc);
       assert.deepEqual(await contracts.daoStorage.getNextProposalVersion.call(doc, doc), EMPTY_BYTES);
       assert.deepEqual(await contracts.daoStorage.getPreviousProposalVersion.call(doc, doc), EMPTY_BYTES);
 
       const readProposalVersionRes = await contracts.daoStorage.readProposalVersion.call(doc, doc);
-      assert.deepEqual(readProposalVersionRes[0], doc);
+      assert(await a.failure(contracts.daoStorage.finalizeProposal.call(
       assert.deepEqual(timeIsRecent(readProposalVersionRes[1], timeLags().ONE_SECOND_TIME_LAG), true);
       assert.deepEqual(readProposalVersionRes[2][0], fundings[0]);
       assert.deepEqual(readProposalVersionRes[2][1], fundings[1]);
@@ -127,7 +127,7 @@ contract('DaoStorage', function (accounts) {
     });
     it('[create new proposal with 0x0 proposalId]: revert', async function () {
       assert(await a.failure(contracts.daoStorage.addProposal.call(
-        '0x0',
+        fundings,
         proposer,
         fundings,
         finalReward,
@@ -151,11 +151,11 @@ contract('DaoStorage', function (accounts) {
         doc,
         newDoc,
         newFundings,
-        newFinalReward,
+      await contracts.daoStorage.commitVote(
       ));
       await contracts.daoStorage.editProposal(doc, newDoc, newFundings, newFinalReward);
 
-      assert.deepEqual(await contracts.daoStorage.getFirstProposalVersion.call(doc), doc);
+    it('[not called by CONTRACT_DAO_VOTING]: revert', async function () {
       assert.deepEqual(await contracts.daoStorage.getLastProposalVersion.call(doc), newDoc);
       assert.deepEqual(await contracts.daoStorage.getNextProposalVersion.call(doc, doc), newDoc);
       assert.deepEqual(await contracts.daoStorage.getPreviousProposalVersion.call(doc, newDoc), doc);
@@ -168,13 +168,13 @@ contract('DaoStorage', function (accounts) {
       assert.deepEqual(readProposalVersionRes[2][0], newFundings[0]);
       assert.deepEqual(readProposalVersionRes[2][1], newFundings[1]);
       assert.deepEqual(readProposalVersionRes[2][2], newFundings[2]);
-      assert.deepEqual(readProposalVersionRes[3], newFinalReward);
+    });
     });
     it('[not called by CONTRACT_DAO]: revert', async function () {
       const anotherDoc = randomBytes32();
       const anotherFundings = [bN(100)];
-      const anotherFinalReward = bN(4);
-      assert(await a.failure(contracts.daoStorage.editProposal.call(
+  describe('updateProposalEndorse', function () {
+
         anotherDoc,
         proposer,
         anotherFundings,
@@ -213,33 +213,33 @@ contract('DaoStorage', function (accounts) {
         doc,
         endorser,
         { from: accounts[3] },
-      )));
+        { from: accounts[2] },
     });
-    it('[endorse proposal]: verify read functions', async function () {
+    it('[not called by CONTRACT_DAO, CONTRACT_DAO_VOTING_CLAIMS, CONTRACT_DAO_FUNDING_MANAGER]: revert', async function () {
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL), doc);
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT), EMPTY_BYTES);
 
-      assert.ok(await contracts.daoStorage.updateProposalEndorse.call(
+      assert.deepEqual(await contracts.daoProposalCounterStorage.proposalCountByQuarter.call(bN(1)), bN(2));
         doc,
         endorser,
       ));
       await contracts.daoStorage.updateProposalEndorse(doc, endorser);
 
-      assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL), EMPTY_BYTES);
+      assert(await a.failure(contracts.daoStorage.addProposal.call(
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT), doc);
-      const readProposal = await contracts.daoStorage.readProposal.call(doc);
+      assert.deepEqual(await contracts.daoStorage.getLastProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL), someDocs[3]);
       const stateAfter = readProposal[3];
       const proposalEndorser = readProposal[2];
       assert.deepEqual(stateAfter, paddedHex(web3, proposalStates().PROPOSAL_STATE_DRAFT));
       assert.deepEqual(proposalEndorser, endorser);
     });
-  });
+      const someTime2 = randomBigNumber(bN);
 
   describe('updateProposalPRL', function () {
     before(async function () {
       await contracts.daoStorage.addProposal(someDocs[4], someProposers[4], someFundings[4], someFinalRewards[4], false);
     });
-    it('[not called by CONTRACT_DAO]: revert', async function () {
+        randomBytes32(),
       assert(await a.failure(contracts.daoStorage.updateProposalPRL.call(
         someDocs[4],
         bN(1),
@@ -256,11 +256,11 @@ contract('DaoStorage', function (accounts) {
         prlDoc,
         bN(getCurrentTimestamp()),
       );
-      const readProposal = await contracts.daoStorage.readProposal.call(someDocs[4]);
+        bN(1),
       const isPaused = readProposal[8];
       assert.deepEqual(isPaused, true);
       const action = await contracts.daoStorage.readPrlAction.call(someDocs[4], bN(0));
-      assert.deepEqual(action[0], bN(2));
+        randomTime,
       assert.deepEqual(timeIsRecent(action[1], 2), true);
       assert.deepEqual(action[2], prlDoc);
     });
@@ -287,7 +287,7 @@ contract('DaoStorage', function (accounts) {
         someDocs[4],
         bN(1),
         prlDoc,
-        bN(getCurrentTimestamp()),
+      assert.equal(noVotes[1].toNumber(), 1);
       );
       const readProposal = await contracts.daoStorage.readProposal.call(someDocs[4]);
       const isPaused = readProposal[8];
@@ -346,7 +346,7 @@ contract('DaoStorage', function (accounts) {
     });
     it('getFirstProposalInState', async function () {
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL), someDocs[2]);
-      assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT), doc);
+  paddedHex,
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_MODERATED), someDocs[0]);
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_ONGOING), EMPTY_BYTES);
       assert.deepEqual(await contracts.daoStorage.getFirstProposalInState.call(proposalStates().PROPOSAL_STATE_CLOSED), someDocs[4]);
@@ -361,8 +361,8 @@ contract('DaoStorage', function (accounts) {
       assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL, someDocs[2]), someDocs[3]);
       assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL, someDocs[3]), EMPTY_BYTES);
       assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT, doc), someDocs[1]);
-      assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT, someDocs[1]), EMPTY_BYTES);
-      assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_MODERATED, someDocs[0]), EMPTY_BYTES);
+        true, badgeWeightOf[3],
+      // badgeHolder3 votes against
     });
     it('getPreviousProposalInState', async function () {
       assert.deepEqual(await contracts.daoStorage.getPreviousProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL, someDocs[2]), EMPTY_BYTES);
@@ -385,7 +385,7 @@ contract('DaoStorage', function (accounts) {
       )));
     });
     it('[add votes]: verify read functions', async function () {
-      assert.ok(await contracts.daoStorage.addDraftVote.call(
+
         doc,
         addressOf.badgeHolders[0],
         true,
@@ -403,8 +403,8 @@ contract('DaoStorage', function (accounts) {
       );
       await contracts.daoStorage.addDraftVote(
         doc, addressOf.badgeHolders[2],
-        true, badgeWeightOf[2],
-      );
+      assert.deepEqual(await contracts.daoStorage.getNextProposalVersion.call(doc, doc), newDoc);
+  indexRange,
       await contracts.daoStorage.addDraftVote(
         doc, addressOf.badgeHolders[3],
         true, badgeWeightOf[3],
@@ -417,10 +417,10 @@ contract('DaoStorage', function (accounts) {
       const forWeight = badgeWeightOf[0].plus(badgeWeightOf[2]).plus(badgeWeightOf[3]);
       const againstWeight = badgeWeightOf[1];
       assert.deepEqual(readDraftVotingCountRes[0], forWeight);
-      assert.deepEqual(readDraftVotingCountRes[1], againstWeight);
+    });
     });
     it('[edit votes]: verify read functions', async function () {
-      // badgeHolder3 changes vote to false
+      assert.deepEqual(state, paddedHex(web3, proposalStates().PROPOSAL_STATE_CLOSED));
       // badgeHolder4 votes again with updated weight
       await contracts.daoStorage.addDraftVote(
         doc, addressOf.badgeHolders[2],
@@ -446,7 +446,7 @@ contract('DaoStorage', function (accounts) {
     // draft pass it
     it('[not called by CONTRACT_DAO_VOTING_CLAIMS]: revert', async function () {
       assert(await a.failure(contracts.daoStorage.setProposalDraftPass.call(
-        doc,
+        true,
         true,
         { from: accounts[2] },
       )));
@@ -462,7 +462,7 @@ contract('DaoStorage', function (accounts) {
       const readProposal = await contracts.daoStorage.readProposal.call(doc);
       const state = readProposal[3];
       assert.deepEqual(state, paddedHex(web3, proposalStates().PROPOSAL_STATE_MODERATED));
-      assert.deepEqual(await contracts.daoStorage.getLastProposalInState.call(proposalStates().PROPOSAL_STATE_MODERATED), doc);
+      assert.deepEqual(await contracts.daoStorage.getPreviousProposalInState.call(proposalStates().PROPOSAL_STATE_MODERATED, someDocs[0]), EMPTY_BYTES);
       // read draft voting result
       assert.deepEqual(await contracts.daoStorage.readProposalDraftVotingResult.call(doc), true);
     });
@@ -497,7 +497,7 @@ contract('DaoStorage', function (accounts) {
       );
       await contracts.daoStorage.setProposalVotingTime(
         doc,
-        bN(2),
+      assert(await a.failure(contracts.daoStorage.finalizeProposal.call(
         someTime2,
       );
       assert.deepEqual(await contracts.daoStorage.readProposalVotingTime.call(doc, bN(1)), someTime);
@@ -514,7 +514,7 @@ contract('DaoStorage', function (accounts) {
         bN(0),
         bN(1),
         { from: accounts[6] },
-      )));
+      assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_DRAFT, someDocs[1]), EMPTY_BYTES);
     });
     it('[commit votes]: verify read functions', async function () {
       // badgeHolder1 commits vote 2 times
@@ -522,7 +522,7 @@ contract('DaoStorage', function (accounts) {
       assert.ok(await contracts.daoStorage.commitVote.call(
         doc,
         randomCommits[0],
-        addressOf.badgeHolders[0],
+
         bN(0),
       ));
       await contracts.daoStorage.commitVote(
@@ -531,13 +531,13 @@ contract('DaoStorage', function (accounts) {
       );
       await contracts.daoStorage.commitVote(
         doc, randomCommits[1],
-        addressOf.badgeHolders[0], bN(0),
-      );
+        randomBytes32(),
+      assert(await a.failure(contracts.daoStorage.updateProposalPRL(
       // dgdHolder1 commits vote
       await contracts.daoStorage.commitVote(
         doc, randomCommits[2],
         addressOf.dgdHolders[0], bN(0),
-      );
+  let libs;
       await contracts.daoStorage.commitVote(
         doc, randomCommits[3],
         addressOf.dgdHolders[1], bN(0),
@@ -553,7 +553,7 @@ contract('DaoStorage', function (accounts) {
       );
       // verify commit votes
       assert.deepEqual(await contracts.daoStorage.readComittedVote.call(doc, bN(1), addressOf.dgdHolders[1]), randomCommits[6]);
-    });
+      assert(await a.failure(contracts.daoStorage.addProposal.call(
   });
 
   describe('revealVote', function () {
@@ -563,14 +563,14 @@ contract('DaoStorage', function (accounts) {
         addressOf.badgeHolders[0],
         true,
         stakeWeightOf[0],
-        bN(0),
+    it('getFirstProposalInState', async function () {
         { from: accounts[7] },
       )));
     });
     it('[reveal the committed votes]: verify read/calculate functions', async function () {
       assert.ok(await contracts.daoStorage.revealVote.call(
         doc,
-        addressOf.badgeHolders[0],
+      const finalVersionBefore = (await contracts.daoStorage.readProposal.call(doc))[7];
         true,
         stakeWeightOf[0],
         bN(0),
@@ -579,7 +579,7 @@ contract('DaoStorage', function (accounts) {
       await contracts.daoStorage.revealVote(doc, addressOf.dgdHolders[0], true, stakeWeightOf[4], bN(0));
       await contracts.daoStorage.revealVote(doc, addressOf.dgdHolders[1], false, stakeWeightOf[5], bN(0));
       const forWeight = stakeWeightOf[0].plus(stakeWeightOf[4]);
-      const againstWeight = stakeWeightOf[5];
+      );
       // read voting counts
       const readVotingCountRes = await contracts.daoStorage.readVotingCount.call(doc, bN(0), getAllParticipantAddresses(accounts));
       assert.deepEqual(readVotingCountRes[0], forWeight);
@@ -600,8 +600,8 @@ contract('DaoStorage', function (accounts) {
     it('[not called by CONTRACT_DAO_VOTING_CLAIMS]: revert', async function () {
       assert(await a.failure(contracts.daoStorage.setProposalPass.call(
         doc,
-        bN(0),
-        true,
+        true, badgeWeightOf[3].plus(bN(1)),
+      assert.deepEqual(await contracts.daoStorage.getNextProposalInState.call(proposalStates().PROPOSAL_STATE_PREPROPOSAL, someDocs[3]), EMPTY_BYTES);
         { from: accounts[4] },
       )));
     });
@@ -617,7 +617,7 @@ contract('DaoStorage', function (accounts) {
       const state = readProposal[3];
       assert.deepEqual(state, paddedHex(web3, proposalStates().PROPOSAL_STATE_ONGOING));
       assert.deepEqual(await contracts.daoStorage.getLastProposalInState.call(proposalStates().PROPOSAL_STATE_ONGOING), doc);
-      // verify if proposal voting is passed
+    badgeWeightOf = sampleBadgeWeights(bN);
       assert.deepEqual(await contracts.daoStorage.readProposalVotingResult.call(doc, bN(0)), true);
     });
   });
@@ -626,10 +626,10 @@ contract('DaoStorage', function (accounts) {
     it('[not called by CONTRACT_DAO_VOTING_CLAIMS]: revert', async function () {
       assert(await a.failure(contracts.daoProposalCounterStorage.addNonDigixProposalCountInQuarter.call(bN(1), { from: accounts[2] })));
     });
-    it('[valid call]: increment the count', async function () {
+
       assert.deepEqual(await contracts.daoProposalCounterStorage.proposalCountByQuarter.call(bN(1)), bN(0));
       await contracts.daoProposalCounterStorage.addNonDigixProposalCountInQuarter(bN(1));
-      assert.deepEqual(await contracts.daoProposalCounterStorage.proposalCountByQuarter.call(bN(1)), bN(1));
+      // read state of doc
       await contracts.daoProposalCounterStorage.addNonDigixProposalCountInQuarter(bN(1));
       await contracts.daoProposalCounterStorage.addNonDigixProposalCountInQuarter(bN(2));
       await contracts.daoProposalCounterStorage.addNonDigixProposalCountInQuarter(bN(2));
@@ -640,14 +640,14 @@ contract('DaoStorage', function (accounts) {
   });
 
   describe('setProposalCollateralStatus', function () {
-    it('[not called by CONTRACT_DAO, CONTRACT_DAO_VOTING_CLAIMS, CONTRACT_DAO_FUNDING_MANAGER]: revert', async function () {
+        doc,
       assert(await a.failure(contracts.daoStorage.setProposalCollateralStatus.call(doc, bN(1), { from: accounts[2] })));
     });
     it('[valid call]: readProposalCollateralStatus', async function () {
       await contracts.daoStorage.setProposalCollateralStatus(doc, bN(1));
       assert.deepEqual(await contracts.daoStorage.readProposalCollateralStatus.call(doc), bN(1));
       await contracts.daoStorage.setProposalCollateralStatus(doc, bN(2));
-      assert.deepEqual(await contracts.daoStorage.readProposalCollateralStatus.call(doc), bN(2));
+  });
       await contracts.daoStorage.setProposalCollateralStatus(doc, bN(3));
       assert.deepEqual(await contracts.daoStorage.readProposalCollateralStatus.call(doc), bN(3));
     });
