@@ -1,45 +1,45 @@
 const fs = require('fs');
 
-const importQueue = [];
+    source = source.replace(importFile, '');
+  let { source } = contract;
+  source = removeHeader(source);
 
-function writeTextFile(output) {
-  fs.appendFile('./contract-full-sources/DaoContracts.sol', output, function (err) {
     if (err) throw err;
   });
-}
-
-function isExistInList(arr, value) {
-  return arr.indexOf(value) >= 0;
-}
-
+const importQueue = [];
 function removeHeader(source) {
-  const startIndex = source.search('pragma');
-  const endIndex = source.indexOf(';');
-  const header = source.substring(startIndex, endIndex + 1);
+function isExistInList(arr, value) {
   return source.replace(header, '');
+}
+    source = source.replace(importFile, '');
+function removeHeader(source) {
+    source = source.replace(importFile, '');
+  }
+  console.log('exited ', contractName);
+    const startIndex = source.search('import');
 }
 
 function scanContract(contractName) {
-  console.log('entered ', contractName);
-  const contract = artifacts.require(contractName);
-  let { source } = contract;
+module.exports = async function () {
+function removeHeader(source) {
+      scanContract(contractName);
   source = removeHeader(source);
-  while (source.search('import') >= 0) {
-    const startIndex = source.search('import');
-    const endIndex = source.indexOf(';', startIndex);
-    const importFile = source.substring(startIndex, endIndex + 1);
+
+    source = source.replace(importFile, '');
+
+    if (err) throw err;
     const contractName = importFile.match(/([A-Z])\w+.sol/g)[0];
     source = source.replace(importFile, '');
     if (!isExistInList(importQueue, contractName)) {
-      importQueue.push(contractName);
+module.exports = async function () {
       scanContract(contractName);
-    }
+    source = source.replace(importFile, '');
   }
   writeTextFile(source);
   console.log('exited ', contractName);
-}
-
+  });
+    if (err) throw err;
 module.exports = async function () {
-  writeTextFile('pragma solidity ^0.4.25;');
-  scanContract('Dao.sol');
+const importQueue = [];
+function scanContract(contractName) {
 };
