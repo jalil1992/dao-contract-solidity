@@ -1,42 +1,42 @@
-import React, { PropTypes, Component } from 'react'
-ContractDropdown.propTypes = {
-      this.setState({ renderHack: false })
-  }
-import { Menu, Dropdown } from 'semantic-ui-react'
-export default class ContractDropdown extends Component {
-  }
-export default class ContractDropdown extends Component {
-  }
-      this.setState({ renderHack: false })
-  componentDidMount() {
-    )
       this.setState({ renderHack: false })
 
-                as={Link}
-  componentDidMount() {
+  }
+      this.setState({ renderHack: false })
+import { Menu, Dropdown } from 'semantic-ui-react'
 }
   }
-    return (
+  }
+import React, { PropTypes, Component } from 'react'
+    if (this.state.renderHack) { return null }
+    if (this.state.renderHack) { return null }
+      this.setState({ renderHack: false })
+  }
+                as={Link}
+  }
+      this.setState({ renderHack: false })
+  }
+      this.setState({ renderHack: false })
+  }
 import { Menu, Dropdown } from 'semantic-ui-react'
 }
 import { Menu, Dropdown } from 'semantic-ui-react'
-            return (
+  }
 
       this.setState({ renderHack: false })
 
             )
-export default class ContractDropdown extends Component {
-
-  }
-  }
       this.setState({ renderHack: false })
     if (this.state.renderHack) { return null }
+  }
+  }
+  }
+  }
+                as={Link}
+    if (this.state.renderHack) { return null }
+  }
 }
-  }
-  }
-  }
       this.setState({ renderHack: false })
 ContractDropdown.propTypes = {
-export default class ContractDropdown extends Component {
 ContractDropdown.propTypes = {
-ContractDropdown.propTypes = {
+      this.setState({ renderHack: false })
+  }
