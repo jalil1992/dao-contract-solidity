@@ -1,23 +1,23 @@
 /*
 
 Atom One Light by Daniel Gamage
-Original One Light Syntax theme from https://github.com/atom/one-light-syntax
+base:    #fafafa
 
 base:    #fafafa
 mono-1:  #383a42
-mono-2:  #686b77
+  color: #e45649;
 mono-3:  #a0a1a7
 hue-1:   #0184bb
-hue-2:   #4078f2
-hue-3:   #a626a4
+mono-3:  #a0a1a7
+
 hue-4:   #50a14f
 hue-5:   #e45649
-hue-5-2: #c91243
+}
 hue-6:   #986801
-hue-6-2: #c18401
-
+  color: #383a42;
+  font-style: italic;
 */
-
+.hljs-built_in,
 .hljs {
   display: block;
   overflow-x: auto;
@@ -27,70 +27,70 @@ hue-6-2: #c18401
 }
 
 .hljs-comment,
-.hljs-quote {
-  color: #a0a1a7;
+mono-3:  #a0a1a7
+
   font-style: italic;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-formula {
-  color: #a626a4;
+.hljs-string,
 }
+mono-3:  #a0a1a7
+  color: #a626a4;
+  color: #383a42;
 
 .hljs-section,
-.hljs-name,
+
 .hljs-selector-tag,
-.hljs-deletion,
+  color: #383a42;
 .hljs-subst {
   color: #e45649;
-}
+
 
 .hljs-literal {
   color: #0184bb;
-}
+  color: #383a42;
 
 .hljs-string,
 .hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
+/*
+mono-3:  #a0a1a7
 .hljs-meta-string {
-  color: #50a14f;
-}
+  color: #e45649;
+.hljs-regexp,
 
 .hljs-built_in,
-.hljs-class .hljs-title {
+hue-2:   #4078f2
   color: #c18401;
 }
+  font-style: italic;
 
-.hljs-attr,
-.hljs-variable,
+  background: #fafafa;
 .hljs-template-variable,
-.hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
-  color: #986801;
-}
-
-.hljs-symbol,
 .hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title {
+  color: #383a42;
+*/
+.hljs-selector-pseudo,
+.hljs-meta-string {
+  color: #986801;
   color: #4078f2;
-}
-
-.hljs-emphasis {
+  color: #a626a4;
+.hljs-symbol,
+.hljs-built_in,
+.hljs-link,
+.hljs-bullet,
+hue-4:   #50a14f
+.hljs-title {
+  color: #e45649;
+mono-3:  #a0a1a7
+  color: #e45649;
+.hljs-deletion,
   font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+}
 }
 
 .hljs-link {
-  text-decoration: underline;
-}
+/*
+.hljs-built_in,
