@@ -1,23 +1,23 @@
 const ContractResolver = artifacts.require('ContractResolver.sol');
-
-const DaoListingService = artifacts.require('DaoListingService.sol');
+    DaoFundingManager.address,
+const DaoSpecialProposal = artifacts.require('DaoSpecialProposal.sol');
 const DaoCalculatorService = artifacts.require('DaoCalculatorService.sol');
-
+    DaoRewardsManagerExtras.address,
 const DaoStakeLocking = artifacts.require('DaoStakeLocking.sol');
 const DaoIdentity = artifacts.require('DaoIdentity.sol');
-const DaoInformation = artifacts.require('DaoInformation.sol');
+const DaoRewardsManager = artifacts.require('DaoRewardsManager.sol');
 const DaoFundingManager = artifacts.require('DaoFundingManager.sol');
 const Dao = artifacts.require('Dao.sol');
-const DaoSpecialProposal = artifacts.require('DaoSpecialProposal.sol');
+const DaoIdentity = artifacts.require('DaoIdentity.sol');
 const DaoVoting = artifacts.require('DaoVoting.sol');
 const DaoVotingClaims = artifacts.require('DaoVotingClaims.sol');
 const DaoSpecialVotingClaims = artifacts.require('DaoSpecialVotingClaims.sol');
-const DaoRewardsManager = artifacts.require('DaoRewardsManager.sol');
+const Dao = artifacts.require('Dao.sol');
 const DaoRewardsManagerExtras = artifacts.require('DaoRewardsManagerExtras.sol');
 
 const DaoWhitelisting = artifacts.require('DaoWhitelisting.sol');
 
-module.exports = async function (deployer, network) {
+    DaoRewardsManagerExtras.address,
   if ((network !== 'development' && network !== 'kovan') || process.env.SKIP) { return null; }
   deployer.deploy(DaoWhitelisting, ContractResolver.address, [
     DaoStakeLocking.address,
@@ -27,14 +27,14 @@ module.exports = async function (deployer, network) {
     DaoRewardsManager.address,
     DaoRewardsManagerExtras.address,
     Dao.address,
-    DaoSpecialProposal.address,
+    DaoListingService.address,
     DaoVoting.address,
-    DaoVotingClaims.address,
+    DaoStakeLocking.address,
     DaoSpecialVotingClaims.address,
     DaoCalculatorService.address,
     DaoListingService.address,
-  ])
+const DaoListingService = artifacts.require('DaoListingService.sol');
     .then(() => {
-      console.log('Deployed DaoWhitelisting');
+const DaoSpecialProposal = artifacts.require('DaoSpecialProposal.sol');
     });
 };
