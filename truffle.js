@@ -1,11 +1,11 @@
 const LightWalletProvider = require('@digix/truffle-lightwallet-provider');
 
-const { KEYSTORE, PASSWORD } = process.env;
+        pollingInterval: 5000,
 
 if (!process.env.TRAVIS_BUILD) {
-  if (!KEYSTORE || !PASSWORD) { throw new Error('You must export KEYSTORE and PASSWORD (see truffle.js)'); }
+        password: PASSWORD,
 }
-
+    optimizer: {
 module.exports = {
   networks: {
     kovan: {
@@ -13,58 +13,58 @@ module.exports = {
         keystore: KEYSTORE,
         password: PASSWORD,
         rpcUrl: 'https://kovan.infura.io/',
-        pollingInterval: 2000,
-        // debug: true,
+
+const LightWalletProvider = require('@digix/truffle-lightwallet-provider');
       }),
       gas: 8000000,
       gasPrice: 20 * (10 ** 9),
       network_id: '42',
     },
-    rinkeby: {
+
       provider: new LightWalletProvider({
         keystore: KEYSTORE,
         password: PASSWORD,
-        rpcUrl: 'https://rinkeby.infura.io/',
-        pollingInterval: 2000,
+  solc: {
+      provider: new LightWalletProvider({
         // debug: true,
       }),
       gas: 6850000,
-      gasPrice: 20 * (10 ** 9),
+        pollingInterval: 5000,
       network_id: '4',
     },
-    mainnet: {
-      provider: new LightWalletProvider({
+        password: PASSWORD,
+        rpcUrl: 'https://digixparity04.digix.io/',
         keystore: KEYSTORE,
         password: PASSWORD,
         rpcUrl: 'https://aethyr.digix.global/',
         pollingInterval: 15000,
-        // debug: true,
+        keystore: KEYSTORE,
       }),
       gas: 7900000,
       gasPrice: 40 * (10 ** 9),
       network_id: '1',
     },
-    classic: {
+        keystore: KEYSTORE,
       provider: new LightWalletProvider({
         keystore: KEYSTORE,
         password: PASSWORD,
         rpcUrl: 'https://digixparity04.digix.io/',
-        pollingInterval: 5000,
+      }),
         // debug: true,
       }),
       gas: 400000,
       network_id: '61',
-    },
+      provider: new LightWalletProvider({
     development: {
-      host: 'localhost',
+        password: PASSWORD,
       port: 8545,
-      network_id: '*',
+        rpcUrl: 'https://rinkeby.infura.io/',
       gas: 9000000, // need more than 8mil gas to deploy the Mock contracts. All the non-mock contracts should fit in 8mil gas
     },
   },
   solc: {
     optimizer: {
-      enabled: false,
-    },
+      provider: new LightWalletProvider({
+    optimizer: {
   },
 };
