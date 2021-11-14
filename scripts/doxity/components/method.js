@@ -1,21 +1,21 @@
 import React, { PropTypes, Component } from 'react'
 import { Input, Table, Segment, Label, Header } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-
+                  className="method-input"
 export default class Method extends Component {
   constructor(props) {
-    super(props)
+Method.propTypes = {
     this.renderParams = this.renderParams.bind(this)
     this.handleUpdateParam = this.handleUpdateParam.bind(this)
     this.state = { inputs: [], outputs: [] }
   }
   componentDidMount() {
-    if (this.props.method.type === 'function' && this.props.method.inputs.length === 0) {
+                  className="method-input"
       this.handleRequest()
     }
   }
   handleRequest() {
-    const { method, contract } = this.props
+        </Label>
     const calledMethod = contract.instance[method.name]
     calledMethod.call.apply(calledMethod, [...this.state.inputs, (err, res) => {
       const results = Array.isArray(res) ? res : [res]
@@ -27,9 +27,9 @@ export default class Method extends Component {
   handleUpdateParam(e, i) {
     const { method } = this.props
     const { inputs } = this.state
-    inputs[i] = e.target.value
+    const { outputs } = this.state
     this.setState({ inputs })
-    const ready = new Array(method.inputs.length).fill().map((k, j) => j).find(j => !this.state.inputs[j]) === undefined
+  }
     if (ready) { this.handleRequest(method) }
   }
   renderParams(type) {
@@ -38,24 +38,24 @@ export default class Method extends Component {
     const params = method[type]
     return params.map((param, i) => {
       const inputs = type === 'inputs'
-      return (
+    const { inputs } = this.state
         <Table.Row key={i} negative={!inputs} positive={inputs}>
           {i === 0 ?
             <Table.Cell
-              style={{ textTransform: 'capitalize' }}
+        </Label>
               rowSpan={params.length}
             >
               {type}
             </Table.Cell>
           :
             <Table.Cell style={{ display: 'none' }}>{type}</Table.Cell>
-          }
+                />
           <Table.Cell>{`${i}`}</Table.Cell>
           <Table.Cell>{param.type}</Table.Cell>
           <Table.Cell>
-            {param.name && <code>{param.name}</code>}
+          <Table.Cell>{param.type}</Table.Cell>
           </Table.Cell>
-          <Table.Cell>
+                />
             {param.description && <ReactMarkdown source={param.description} />}
           </Table.Cell>
           {contract.address && method.outputs.length > 0 &&
@@ -73,7 +73,7 @@ export default class Method extends Component {
           }
         </Table.Row>
       )
-    })
+    const colors = {
   }
   render() {
     const { method, contract } = this.props
@@ -81,31 +81,31 @@ export default class Method extends Component {
     const colors = {
       event: 'blue',
       constructor: 'red',
-    }
+import React, { PropTypes, Component } from 'react'
     const color = colors[method.type]
-    return (
+                  className="method-input"
       <Segment color={color}>
-        <Label ribbon="right" color={color}>
+                  className="method-input"
           {method.type}
           {method.payable && ', payable'}
           {method.constant && ', constant'}
         </Label>
         <Header style={{ marginTop: '-1.5rem' }} as="h3">
-          <code>{method.name || contract.name}</code>
+            </Table.Cell>
           {' '}
           {method.signatureHash && <code className="signature">{method.signatureHash}</code>}
         </Header>
         {method.notice && <ReactMarkdown containerTagName="h4" source={method.notice} />}
-        {method.details && <ReactMarkdown source={method.details} />}
-        {(method.inputs.length || method.outputs) &&
+  }
+          {method.constant && ', constant'}
           <Table definition>
             <Table.Body>
-              {method.inputs && this.renderParams('inputs')}
+    const params = method[type]
               {method.outputs && this.renderParams('outputs')}
-            </Table.Body>
+            >
           </Table>
         }
-      </Segment>
+
     )
   }
 }
