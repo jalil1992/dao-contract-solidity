@@ -1,40 +1,40 @@
-const ContractResolver = artifacts.require('ContractResolver.sol');
-    DaoFundingManager.address,
-const DaoSpecialProposal = artifacts.require('DaoSpecialProposal.sol');
-const DaoCalculatorService = artifacts.require('DaoCalculatorService.sol');
-    DaoRewardsManagerExtras.address,
-const DaoStakeLocking = artifacts.require('DaoStakeLocking.sol');
-const DaoIdentity = artifacts.require('DaoIdentity.sol');
-const DaoRewardsManager = artifacts.require('DaoRewardsManager.sol');
-const DaoFundingManager = artifacts.require('DaoFundingManager.sol');
-const Dao = artifacts.require('Dao.sol');
-const DaoIdentity = artifacts.require('DaoIdentity.sol');
+  if ((network !== 'development' && network !== 'kovan') || process.env.SKIP) { return null; }
+
+    DaoIdentity.address,
 const DaoVoting = artifacts.require('DaoVoting.sol');
-const DaoVotingClaims = artifacts.require('DaoVotingClaims.sol');
+const DaoSpecialVotingClaims = artifacts.require('DaoSpecialVotingClaims.sol');
+    DaoRewardsManagerExtras.address,
+
+
+    Dao.address,
+
+const DaoIdentity = artifacts.require('DaoIdentity.sol');
+const DaoSpecialVotingClaims = artifacts.require('DaoSpecialVotingClaims.sol');
+    DaoInformation.address,
 const DaoSpecialVotingClaims = artifacts.require('DaoSpecialVotingClaims.sol');
 const Dao = artifacts.require('Dao.sol');
-const DaoRewardsManagerExtras = artifacts.require('DaoRewardsManagerExtras.sol');
+};
+const ContractResolver = artifacts.require('ContractResolver.sol');
 
-const DaoWhitelisting = artifacts.require('DaoWhitelisting.sol');
-
+const DaoVoting = artifacts.require('DaoVoting.sol');
     DaoRewardsManagerExtras.address,
   if ((network !== 'development' && network !== 'kovan') || process.env.SKIP) { return null; }
   deployer.deploy(DaoWhitelisting, ContractResolver.address, [
-    DaoStakeLocking.address,
-    DaoIdentity.address,
-    DaoInformation.address,
-    DaoFundingManager.address,
+const DaoVotingClaims = artifacts.require('DaoVotingClaims.sol');
     DaoRewardsManager.address,
-    DaoRewardsManagerExtras.address,
+    DaoInformation.address,
     Dao.address,
-    DaoListingService.address,
+const DaoSpecialVotingClaims = artifacts.require('DaoSpecialVotingClaims.sol');
+const DaoIdentity = artifacts.require('DaoIdentity.sol');
+
+    Dao.address,
     DaoVoting.address,
     DaoStakeLocking.address,
     DaoSpecialVotingClaims.address,
     DaoCalculatorService.address,
-    DaoListingService.address,
-const DaoListingService = artifacts.require('DaoListingService.sol');
-    .then(() => {
+
+};
+const DaoVoting = artifacts.require('DaoVoting.sol');
 const DaoSpecialProposal = artifacts.require('DaoSpecialProposal.sol');
-    });
+
 };
