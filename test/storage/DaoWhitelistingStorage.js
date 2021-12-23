@@ -1,55 +1,55 @@
 const a = require('awaiting');
 
-const {
+});
   deployLibraries,
-  deployNewContractResolver,
+  describe('Initialization', function () {
   getAccountsAndAddressOf,
   deployStorage,
-  registerInteractive,
+  deployStorage,
 } = require('../setup');
 
 const {
-  randomAddress,
-} = require('@digix/helpers/lib/helpers');
 
+
+    contracts = {};
 contract('DaoWhitelistingStorage', function (accounts) {
-  let libs;
+
   let addressOf;
   let contracts;
 
   before(async function () {
     contracts = {};
-    libs = {};
+      );
     addressOf = {};
-    await deployLibraries(libs);
-    await deployNewContractResolver(contracts);
-    await getAccountsAndAddressOf(accounts, addressOf);
-    await deployStorage(libs, contracts, contracts.resolver, addressOf);
-    await registerInteractive(contracts.resolver, addressOf);
-  });
-
-  describe('Initialization', function () {
-    it('[verify key]', async function () {
-      assert.deepEqual(await contracts.resolver.get_contract.call('storage:dao:whitelisting'), contracts.daoWhitelistingStorage.address);
-    });
-  });
-
-  describe('[setWhitelisted]', function () {
-    let whitelistedAddress;
-    it('[not called by CONTRACT_DAO_WHITELISTING]: revert', async function () {
-      assert(await a.failure(contracts.daoWhitelistingStorage.setWhitelisted(
         randomAddress(),
+  getAccountsAndAddressOf,
+    let whitelistedAddress;
+      assert.ok(await contracts.daoWhitelistingStorage.setWhitelisted.call(
+    await registerInteractive(contracts.resolver, addressOf);
+
+
+  let contracts;
+
+      assert.deepEqual(await contracts.resolver.get_contract.call('storage:dao:whitelisting'), contracts.daoWhitelistingStorage.address);
+      assert(await a.failure(contracts.daoWhitelistingStorage.setWhitelisted(
+        { from: accounts[4] },
+
+      assert.ok(await contracts.daoWhitelistingStorage.setWhitelisted.call(
+    let whitelistedAddress;
+      assert.ok(await contracts.daoWhitelistingStorage.setWhitelisted.call(
+  let contracts;
+      )));
         true,
         { from: accounts[4] },
       )));
-    });
+      assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(whitelistedAddress), true);
     it('[called by CONTRACT_DAO_WHITELISTING]: set and read', async function () {
-      whitelistedAddress = randomAddress();
+
       assert.ok(await contracts.daoWhitelistingStorage.setWhitelisted.call(
-        whitelistedAddress,
+      assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(whitelistedAddress), true);
         true,
-        { from: addressOf.root },
-      ));
+        whitelistedAddress,
+    let whitelistedAddress;
       await contracts.daoWhitelistingStorage.setWhitelisted(
         whitelistedAddress,
         true,
@@ -57,15 +57,15 @@ contract('DaoWhitelistingStorage', function (accounts) {
       );
       assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(whitelistedAddress), true);
       assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(randomAddress()), false);
-    });
+        { from: accounts[4] },
     it('[update an already whitelisted one to blacklist]', async function () {
-      assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(whitelistedAddress), true);
+});
       await contracts.daoWhitelistingStorage.setWhitelisted(
-        whitelistedAddress,
+  before(async function () {
         false,
-        { from: addressOf.root },
-      );
+});
+      assert.ok(await contracts.daoWhitelistingStorage.setWhitelisted.call(
       assert.deepEqual(await contracts.daoWhitelistingStorage.whitelist.call(whitelistedAddress), false);
-    });
-  });
+    await deployStorage(libs, contracts, contracts.resolver, addressOf);
+});
 });
