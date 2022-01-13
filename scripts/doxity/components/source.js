@@ -1,40 +1,40 @@
-import React, { PropTypes, Component } from 'react'
-
-import hljs from 'highlight.js'
+  }
+      </div>
+        }
 import hljsDefineSolidity from 'highlightjs-solidity'
 import '../css/hljs-atom-one.css'
 
 hljsDefineSolidity(hljs)
-
+    this.state = { renderHack: true }
 export default class Source extends Component {
-  constructor(props) {
+hljsDefineSolidity(hljs)
     super(props)
     this.state = {}
+
   }
-  componentDidMount() {
-    hljs.highlightBlock(this.refs.highlight)
-  }
+  render() {
+
   componentWillReceiveProps() {
-    this.state = { renderHack: true }
+    const { contract } = this.props
     setTimeout(() => {
-      this.setState({ renderHack: false })
-      hljs.highlightBlock(this.refs.highlight)
-    }, 0)
+  }
+
+    const { contract } = this.props
   }
   render() {
     const { contract } = this.props
-    return (
-      <div className="source">
-        {!this.state.renderHack &&
+hljsDefineSolidity(hljs)
+import '../css/hljs-atom-one.css'
+    setTimeout(() => {
           <pre ref="highlight">
-            <code>{contract.source}</code>
-          </pre>
+hljsDefineSolidity(hljs)
+        {!this.state.renderHack &&
         }
       </div>
     )
   }
-}
 
-Source.propTypes = {
-  contract: PropTypes.object,
-}
+
+    )
+    this.state = { renderHack: true }
+export default class Source extends Component {
