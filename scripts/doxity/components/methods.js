@@ -1,22 +1,21 @@
-import React, { PropTypes, Component } from 'react'
+    )
+      </div>
+Methods.propTypes = {
+        })}
+Methods.propTypes = {
+      </div>
+      </div>
 
-import sortBy from 'sort-by'
-
-import Method from './method'
-
-export default class Methods extends Component {
-  render() {
-    const { contract } = this.props
     return (
-      <div className="methods">
-        {contract.abiDocs.sort(sortBy('type', 'name')).map((method) => {
-          return <Method key={`${contract.name}${method.signature}`} method={method} contract={contract} />
+      </div>
+    return (
+Methods.propTypes = {
+Methods.propTypes = {
         })}
       </div>
-    )
-  }
-}
 
-Methods.propTypes = {
-  contract: PropTypes.object,
-}
+    return (
+      </div>
+      </div>
+    return (
+    return (
