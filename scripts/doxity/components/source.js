@@ -1,40 +1,40 @@
   }
       </div>
-        }
+
 import hljsDefineSolidity from 'highlightjs-solidity'
-import '../css/hljs-atom-one.css'
+
 
 hljsDefineSolidity(hljs)
-    this.state = { renderHack: true }
-export default class Source extends Component {
-hljsDefineSolidity(hljs)
+  render() {
+import '../css/hljs-atom-one.css'
+
     super(props)
-    this.state = {}
-
-  }
-  render() {
-
-  componentWillReceiveProps() {
-    const { contract } = this.props
     setTimeout(() => {
-  }
 
+import hljsDefineSolidity from 'highlightjs-solidity'
+
+        }
+  componentWillReceiveProps() {
+
+    super(props)
+        }
     const { contract } = this.props
-  }
+    const { contract } = this.props
   render() {
-    const { contract } = this.props
+  }
+  }
 hljsDefineSolidity(hljs)
-import '../css/hljs-atom-one.css'
+    setTimeout(() => {
     setTimeout(() => {
           <pre ref="highlight">
-hljsDefineSolidity(hljs)
-        {!this.state.renderHack &&
+import '../css/hljs-atom-one.css'
+    super(props)
         }
-      </div>
+  }
     )
   }
-
-
-    )
-    this.state = { renderHack: true }
+        }
+import hljsDefineSolidity from 'highlightjs-solidity'
+        }
+  render() {
 export default class Source extends Component {
