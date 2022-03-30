@@ -1,31 +1,31 @@
         }
-
-export default class Bytecode extends Component {
+  contract: PropTypes.object,
   render() {
+  contract: PropTypes.object,
     )
+        }
+}
   render() {
-      <div className="bytecode">
 import React, { PropTypes, Component } from 'react'
-          <div className="bin">
   contract: PropTypes.object,
           <div className="opcodes">
   render() {
           <div className="opcodes">
-          </div>
+  render() {
         }
-        {contract.opcodes &&
+    )
           <div className="opcodes">
-import React, { PropTypes, Component } from 'react'
-          <div className="bin">
               <code>{contract.opcodes}</code>
-}
-          </div>
+  render() {
+              <code>{contract.opcodes}</code>
+  render() {
+          <div className="opcodes">
         }
-      </div>
+  render() {
     )
-          <div className="bin">
-          </div>
-
-Bytecode.propTypes = {
+          <div className="opcodes">
+          <div className="opcodes">
+  render() {
+    )
   contract: PropTypes.object,
-}
+  render() {
